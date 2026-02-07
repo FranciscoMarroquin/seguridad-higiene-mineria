@@ -1,26 +1,231 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Seguridad e Higiene – Minería</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
 
-  <main class="max-w-xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-4">
-      Seguridad e Higiene – Minería
-    </h1>
+<body class="bg-slate-950 text-white min-h-screen">
+  <!-- Fondo decorativo -->
+  <div class="absolute inset-0 -z-10">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900"></div>
+    <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/10 blur-3xl"></div>
+    <div class="absolute top-64 right-10 h-72 w-72 rounded-full bg-indigo-500/10 blur-3xl"></div>
+  </div>
 
-    <p class="text-gray-300 mb-6">
-      Consulta el puesto de trabajo, la actividad realizada y el equipo de
-      protección personal recomendado.
-    </p>
+  <!-- Header -->
+  <header class="border-b border-white/10 bg-slate-950/60 backdrop-blur">
+    <div class="mx-auto max-w-6xl px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-xl bg-white/10 grid place-items-center border border-white/10">
+          <!-- Icono simple -->
+          <span class="text-lg">⛑️</span>
+        </div>
+        <div>
+          <p class="font-semibold leading-5">Seguridad e Higiene</p>
+          <p class="text-xs text-slate-300">Minería • Puesto → Actividad → EPP</p>
+        </div>
+      </div>
 
-    <a href="#" class="block bg-gray-800 p-4 rounded-xl hover:bg-gray-700">
-      Comenzar
-    </a>
+      <nav class="flex items-center gap-2 text-sm">
+        <a href="index.html" class="px-3 py-2 rounded-lg hover:bg-white/5 text-slate-200">Inicio</a>
+        <a href="puestos.html" class="px-3 py-2 rounded-lg hover:bg-white/5 text-slate-200">Puestos</a>
+        <a href="#acerca" class="px-3 py-2 rounded-lg hover:bg-white/5 text-slate-200">Acerca</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-10">
+    <!-- HERO -->
+    <section class="grid gap-10 lg:grid-cols-2 items-center">
+      <div>
+        <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
+          <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+          Proyecto académico • Consulta rápida
+        </span>
+
+        <h1 class="mt-4 text-4xl md:text-5xl font-extrabold tracking-tight">
+          Seguridad e Higiene en <span class="text-cyan-300">Minería</span>
+        </h1>
+
+        <p class="mt-4 text-slate-300 leading-relaxed">
+          Esta aplicación web está orientada a la consulta de información básica de seguridad laboral
+          en el sector minero. El objetivo es identificar <span class="text-white font-semibold">puestos de trabajo</span>,
+          reconocer la <span class="text-white font-semibold">actividad</span> que se realiza y consultar el
+          <span class="text-white font-semibold">Equipo de Protección Personal (EPP)</span> recomendado.
+        </p>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="puestos.html"
+             class="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500/90 hover:bg-cyan-500 px-5 py-3 font-semibold text-slate-950">
+            Comenzar
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a href="#acerca"
+             class="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 px-5 py-3 font-semibold text-white">
+            Ver contexto
+          </a>
+        </div>
+
+        <!-- Tarjetas rápidas -->
+        <div class="mt-8 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p class="text-sm font-semibold">Puesto</p>
+            <p class="text-xs text-slate-300 mt-1">Identifica el rol dentro de la operación.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p class="text-sm font-semibold">Actividad</p>
+            <p class="text-xs text-slate-300 mt-1">Consulta tareas y enfoque preventivo.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <p class="text-sm font-semibold">EPP</p>
+            <p class="text-xs text-slate-300 mt-1">Recomendaciones para reducir riesgos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lienzo para imagen principal (tú pones el URL) -->
+      <div class="rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
+        <div class="p-4 border-b border-white/10 flex items-center justify-between">
+          <p class="text-sm font-semibold text-slate-100">Imagen principal</p>
+          <p class="text-xs text-slate-300">Coloca tu URL en el src</p>
+        </div>
+
+        <div class="relative">
+          <!-- Cambia el src por tu imagen -->
+          <img
+            src=""
+            alt="Imagen de minería (agregar URL)"
+            class="h-72 w-full object-cover bg-slate-900"
+          />
+
+          <!-- Placeholder visual cuando no hay imagen -->
+          <div class="absolute inset-0 grid place-items-center pointer-events-none">
+            <div class="text-center px-6">
+              <p class="text-slate-200 font-semibold">Espacio para imagen</p>
+              <p class="text-xs text-slate-400 mt-1">Pega tu URL en <code class="text-slate-200">src=""</code></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACERCA / CONTEXTO -->
+    <section id="acerca" class="mt-16">
+      <div class="flex items-end justify-between gap-6 flex-wrap">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold">Contexto del proyecto</h2>
+          <p class="mt-2 text-slate-300 max-w-3xl">
+            La carrera de <span class="text-white font-semibold">Seguridad e Higiene</span> se enfoca en la prevención
+            de riesgos, el control de condiciones inseguras y la promoción de ambientes laborales saludables.
+            En sectores de alto riesgo como la minería, la seguridad se vuelve una prioridad para proteger la vida,
+            evitar accidentes y reducir enfermedades laborales.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        <!-- Card 1 -->
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-semibold">Seguridad e Higiene</h3>
+          <p class="mt-2 text-slate-300 text-sm leading-relaxed">
+            Disciplina orientada a identificar peligros, evaluar riesgos y establecer medidas de prevención
+            como procedimientos, señalización, capacitación y uso correcto del EPP. Su meta es minimizar incidentes
+            y promover una cultura de seguridad.
+          </p>
+
+          <!-- Lienzo para imagen -->
+          <div class="mt-4 rounded-2xl overflow-hidden border border-white/10 bg-slate-900">
+            <img src="" alt="Imagen seguridad e higiene (agregar URL)" class="h-40 w-full object-cover" />
+            <div class="p-3 text-xs text-slate-400">
+              Espacio para imagen (edita <code class="text-slate-200">src=""</code>)
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-semibold">¿Qué es la minería?</h3>
+          <p class="mt-2 text-slate-300 text-sm leading-relaxed">
+            La minería es la actividad de extracción y procesamiento de minerales que se utilizan en construcción,
+            industria y tecnología. Implica operaciones con maquinaria, energía, movimiento de materiales y exposición
+            a agentes físicos y químicos, por lo que requiere controles estrictos de seguridad.
+          </p>
+
+          <!-- Lienzo para imagen -->
+          <div class="mt-4 rounded-2xl overflow-hidden border border-white/10 bg-slate-900">
+            <img src="" alt="Imagen minería (agregar URL)" class="h-40 w-full object-cover" />
+            <div class="p-3 text-xs text-slate-400">
+              Espacio para imagen (edita <code class="text-slate-200">src=""</code>)
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="rounded-3xl border border-white/10 bg-white/5 p-6">
+          <h3 class="text-lg font-semibold">Impacto en Torreón, Coahuila</h3>
+          <p class="mt-2 text-slate-300 text-sm leading-relaxed">
+            En la región de Torreón y La Laguna, la actividad industrial y minera ha tenido relevancia por su aporte
+            al empleo y desarrollo económico. Al mismo tiempo, exige responsabilidad en prevención de riesgos y cuidado
+            de la salud ocupacional, debido a la naturaleza de sus procesos y exposición a peligros.
+          </p>
+
+          <!-- Lienzo para imagen -->
+          <div class="mt-4 rounded-2xl overflow-hidden border border-white/10 bg-slate-900">
+            <img src="" alt="Imagen Torreón/Región Laguna (agregar URL)" class="h-40 w-full object-cover" />
+            <div class="p-3 text-xs text-slate-400">
+              Espacio para imagen (edita <code class="text-slate-200">src=""</code>)
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: CÓMO USAR -->
+    <section class="mt-16">
+      <div class="rounded-3xl border border-white/10 bg-gradient-to-br from-white/5 to-white/0 p-8">
+        <h2 class="text-2xl font-bold">¿Cómo usar la aplicación?</h2>
+        <p class="mt-2 text-slate-300 max-w-3xl">
+          Navega por el catálogo de puestos, elige una actividad y consulta el EPP recomendado.
+          Puedes utilizar la información como apoyo en capacitación, consulta rápida o reforzamiento de cultura preventiva.
+        </p>
+
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p class="font-semibold">1) Selecciona un puesto</p>
+            <p class="text-sm text-slate-300 mt-1">Ej. perforista, operador, ayudante.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p class="font-semibold">2) Elige la actividad</p>
+            <p class="text-sm text-slate-300 mt-1">Tareas y procesos asociados al puesto.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p class="font-semibold">3) Consulta el EPP</p>
+            <p class="text-sm text-slate-300 mt-1">Lista de protección recomendada (placeholder).</p>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <a href="puestos.html"
+             class="inline-flex items-center justify-center rounded-xl bg-white text-slate-950 px-5 py-3 font-semibold hover:bg-slate-100">
+            Ir a Puestos
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
+  <footer class="border-t border-white/10 mt-10">
+    <div class="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-400">
+      <p class="font-semibold text-slate-200">Seguridad e Higiene – Minería</p>
+      <p class="mt-1">
+        Proyecto académico (sitio estático). Contenido e imágenes en proceso de captura.
+      </p>
+    </div>
+  </footer>
 </body>
 </html>
