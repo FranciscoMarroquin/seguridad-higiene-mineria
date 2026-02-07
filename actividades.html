@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actividades – Minería</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tipografía fresca -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body { font-family: "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-950 text-white antialiased">
+  <!-- Fondo -->
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900"></div>
+    <div class="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-500/12 blur-3xl"></div>
+    <div class="absolute top-80 -left-24 h-72 w-72 rounded-full bg-indigo-500/12 blur-3xl"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur">
+    <div class="mx-auto max-w-md px-4 py-3 flex items-center justify-between">
+      <div class="leading-tight">
+        <p id="titulo" class="font-semibold tracking-tight">Actividades</p>
+        <p class="text-xs text-slate-300">Toca una actividad para desplegar EPP, riesgo e impacto</p>
+      </div>
+      <a href="puestos.html" class="px-3 py-2 rounded-xl hover:bg-white/5 text-slate-200 text-sm">← Puestos</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-md px-4 pt-6 pb-10 space-y-4">
+
+    <!-- Imagen automática del puesto -->
+    <section class="rounded-3xl border border-white/10 bg-white/5 overflow-hidden">
+      <div class="px-4 py-3 border-b border-white/10 flex items-center justify-between">
+      <!-- AQUI SE CARGA AUTOMÁTICAMENTE LA IMAGEN SEGÚN EL PUESTO -->
+      <img id="imgPuesto" src="" alt="Imagen del puesto" class="h-44 w-full object-cover bg-slate-900" />
+
+   
+      </div>
+    </section>
+
+    <!-- Lista -->
+    <section class="space-y-3">
+      <h2 class="text-lg font-extrabold tracking-tight">Actividades</h2>
+      <div id="lista" class="grid gap-3"></div>
+    </section>
+
+  </main>
+
+  <!-- data.js DEBE incluir:
+       window.MATRIZ_MINERA
+       window.IMAGEN_POR_PUESTO
+       window.EPP_IMAGENES_POR_ACTIVIDAD
+  -->
+  <script src="data.js"></script>
+
+  <script>
+    // ===========================
+    // Utils UI
+    // ===========================
+    function badgeColor(nombre) {
+      const map = {
+        rojo: "bg-red-500/20 text-red-200 border-red-500/30",
+        naranja: "bg-orange-500/20 text-orange-200 border-orange-500/30",
+        amarillo: "bg-yellow-500/20 text-yellow-200 border-yellow-500/30",
+        verde: "bg-emerald-500/20 text-emerald-200 border-emerald-500/30",
+      };
+      return map[nombre] || "bg-white/10 text-slate-200 border-white/10";
+    }
+
+    function etiquetaImpacto(n) {
+      if (n >= 5) return "Crítico";
+      if (n === 4) return "Alto";
+      if (n === 3) return "Medio";
+      if (n === 2) return "Bajo";
+      return "Mínimo";
+    }
+
+    // ===========================
+    // EPP imágenes dinámicas por actividad
+    // ===========================
+    function renderEppImagenes(actividadId) {
+      const imgs = window.EPP_IMAGENES_POR_ACTIVIDAD?.[actividadId];
+
+      // Si no existe la actividad en el mapa, dejamos 4 lienzos genéricos
+      const data = (imgs && imgs.length)
+        ? imgs
+        : [
+            { label: "EPP 1", src: "" },
+            { label: "EPP 2", src: "" },
+            { label: "EPP 3", src: "" },
+            { label: "EPP 4", src: "" },
+          ];
+
+      return `
+        <div class="rounded-2xl border border-white/10 bg-slate-950/30 p-4">
+          <p class="text-xs text-slate-300 mb-3">EPP (imágenes)</p>
+
+          <div class="grid grid-cols-2 gap-3">
+            ${data.map(item => `
+              <div class="rounded-2xl overflow-hidden border border-white/10 bg-slate-900">
+                <!-- AQUI INSERTA EL URL DE LA IMAGEN (en data.js) -->
+                <img src="${item.src || ""}" alt="${item.label}" class="h-28 w-full object-cover" />
+                <div class="p-2 text-[11px] text-slate-400">
+                  ${item.label}
+                </div>
+              </div>
+            `).join("")}
+          </div>
+
+          <p class="mt-3 text-xs text-slate-400">
+            Tip: Las rutas se asignan en <code class="text-slate-200">EPP_IMAGENES_POR_ACTIVIDAD</code> (data.js).
+          </p>
+        </div>
+      `;
+    }
+ss
+    // ===========================
+    // Obtener puesto desde URL
+    // ===========================
+    const params = new URLSearchParams(window.location.search);
+    const puestoId = params.get("puesto");
+
+    const lista = document.getElementById("lista");
+    const titulo = document.getElementById("titulo");
+    const imgPuesto = document.getElementById("imgPuesto");
+
+    const items = window.MATRIZ_MINERA.filter(x => x.puestoId === puestoId);
+
+    // Imagen automática del puesto
+    const rutaImg = window.IMAGEN_POR_PUESTO?.[puestoId];
+    if (rutaImg) imgPuesto.src = rutaImg;
+    else imgPuesto.removeAttribute("src");
+
+    if (!puestoId || items.length === 0) {
+      titulo.textContent = "Actividades";
+      lista.innerHTML = `
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-5 text-slate-300">
+          No se encontró el puesto. Regresa a Puestos.
+        </div>
+      `;
+    } else {
+      titulo.textContent = items[0].puestoNombre;
+
+      // Render de cada actividad con panel desplegable
+      lista.innerHTML = items.map((a, idx) => {
+        const panelId = `panel-${idx}`;
+        const btnId = `btn-${idx}`;
+
+        return `
+          <!-- TARJETA / BOTÓN -->
+          <button
+            id="${btnId}"
+            type="button"
+            class="text-left rounded-3xl border border-white/10 bg-white/5 p-5 hover:bg-white/10 transition active:scale-[0.99]"
+            aria-controls="${panelId}"
+            aria-expanded="false"
+          >
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-lg font-bold">${a.actividadNombre}</p>
+                <p class="text-sm text-slate-300 mt-1">Riesgo: ${a.riesgo}</p>
+              </div>
+
+              <span class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ${badgeColor(a.color)}">
+                Impacto ${a.impacto} • ${etiquetaImpacto(a.impacto)}
+              </span>
+            </div>
+
+            <p class="mt-3 text-xs text-slate-400">
+              Toca para ver EPP y recomendaciones ↓
+            </p>
+          </button>
+
+          <!-- PANEL DESPLEGABLE (INICIA OCULTO) -->
+          <div id="${panelId}" class="hidden rounded-3xl border border-white/10 bg-white/5 p-5 -mt-1">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <p class="text-sm text-slate-300">Actividad</p>
+                <p class="text-lg font-extrabold">${a.actividadNombre}</p>
+              </div>
+
+              <span class="inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs ${badgeColor(a.color)}">
+                ${a.color.toUpperCase()} • ${a.impacto}
+              </span>
+            </div>
+
+            <div class="mt-4 grid gap-3">
+              <div class="rounded-2xl border border-white/10 bg-slate-950/30 p-4">
+                <p class="text-xs text-slate-300">Riesgo principal</p>
+                <p class="mt-1 font-semibold">${a.riesgo}</p>
+              </div>
+
+              <div class="rounded-2xl border border-white/10 bg-slate-950/30 p-4">
+                <p class="text-xs text-slate-300">EPP especializado</p>
+                <p class="mt-2 text-sm text-slate-100 leading-relaxed">${a.epp}</p>
+              </div>
+
+              <!-- IMÁGENES DINÁMICAS POR ACTIVIDAD -->
+              ${renderEppImagenes(a.actividadId)}
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      // ===========================
+      // Lógica: abrir/cerrar panel + scroll
+      // ===========================
+      const buttons = Array.from(document.querySelectorAll("button[id^='btn-']"));
+
+      buttons.forEach((btn, idx) => {
+        const panel = document.getElementById(`panel-${idx}`);
+
+        btn.addEventListener("click", () => {
+          const abierto = btn.getAttribute("aria-expanded") === "true";
+
+          // Cierra todos primero (solo 1 abierto)
+          buttons.forEach((b, j) => {
+            b.setAttribute("aria-expanded", "false");
+            const p = document.getElementById(`panel-${j}`);
+            if (p) p.classList.add("hidden");
+          });
+
+          // Si estaba cerrado, lo abrimos
+          if (!abierto) {
+            btn.setAttribute("aria-expanded", "true");
+            panel.classList.remove("hidden");
+
+            // Scroll suave hacia el panel (mobile UX)
+            panel.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
